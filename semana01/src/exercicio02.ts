@@ -6,5 +6,5 @@ export default function exercicio02(){
     var altura = leia.questionFloat("digite a altura");
     var area = largura * altura;
 
-    console.log(area)
+    console.log( "area");
 }

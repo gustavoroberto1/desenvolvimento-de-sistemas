@@ -3,9 +3,13 @@ import exercicio01 from './exercicio01';
 import exercicio02 from './exercicio02';
 import exercicio03 from './exercicio03';
 import exercicio04 from './exercicio04';
+import exercicio05 from './exercicio05';
+import exercicio06 from './exercicio06';
+import exercicio07 from './exercicio07';
+import exercicio08 from './exercicio08';
 
 var opcao = leia.keyInSelect([
-    "exercicio 01","exercicio 02","exercicio 03","exerciocio 04",   
+    "exercicio 01","exercicio 02","exercicio 03","exerciocio 04", "exercicio05" ,"execicio06" , "exercicio07" ,"exercicio08",
 ]) + 1;
  switch(opcao){
     case 1:
@@ -20,6 +24,18 @@ var opcao = leia.keyInSelect([
     case 4:
         exercicio04();
         break;
+    case 5:
+        exercicio05();
+        break;    
+    case 6:
+        exercicio06();
+        break;    
+    case 7:
+        exercicio07();
+        break;    
+    case 8:
+        exercicio08();
+        break;        
  }
 
 
