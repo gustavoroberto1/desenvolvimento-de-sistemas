@@ -20,6 +20,13 @@ import exercicio18 from './exercicio18';
 import exercicio19 from './exercicio19';
 import exercicio20 from './exercicio20';
 import exercicio21 from './exercicio21';
+import exercicio22 from './exercicio22';
+import exercicio23 from './exercicio23';
+import exercicio24 from './exercicio24';
+import exercicio25 from './exercicio25';
+import exercicio26 from './exercicio26';
+import exercicio27 from './exercicio27';
+import exercicio28 from './exercicio28';
 
 
 var opcao = leia.keyInSelect([
@@ -83,18 +90,33 @@ var opcao = leia.keyInSelect([
     case 19:
         exercicio19();
         break;         
-        case 20:
+    case 20:
         exercicio20();
         break;         
-        case 21:
+    case 21:
+        exercicio21();
+        break;         
+    case 22:
         exercicio22();
         break;         
-        case 17:
+    case 23:
         exercicio23();
         break;         
-        case 17:
+    case 24:
         exercicio24();
         break;         
+    case 25:
+        exercicio25();
+        break;         
+    case 26:
+        exercicio26();
+        break;  
+    case 27:
+        exercicio27();
+        break;         
+    case 28:
+        exercicio28();
+        break;                
 
  }
 
