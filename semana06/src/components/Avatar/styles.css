@@ -1,0 +1,15 @@
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    border: 4px solid #202024;
+    outline: 2 solid #00875f;
+
+}
+
+.avatar-without-border {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+
+}

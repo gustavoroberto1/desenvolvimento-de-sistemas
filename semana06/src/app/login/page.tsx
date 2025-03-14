@@ -1,4 +1,4 @@
-import Link from "next/link";
+'use client'
 import "./Styles.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -43,8 +43,9 @@ export default function login(){
                 />
                 <button className="button"
                 onClick={handleSubmit}
-                disabled={!email || !password}
-                >Entrar</button>
+                disabled={!email || !password}>
+                   Entrar
+                </button>
             </div>
         </div>
         
