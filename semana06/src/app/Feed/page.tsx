@@ -4,7 +4,11 @@ import "./styles.css"
 import Image from "next/image";
 import gato from '@/assets/Gato-x-leao.jpg'
 import Avatar from "@/components/Avatar";
+import { PiPencilLine } from "react-icons/pi";
+import Post from "@/components/Post";
 export default function Feed() {
+
+
     return (
         <div>
             <Header />
@@ -16,7 +20,15 @@ export default function Feed() {
 
                     <Avatar src= "https://avatars.githubusercontent.com/u/170477548?v=4&size=64" hasBorder/>
                     <strong>Rosane Maia</strong>
-                    <span>diarista</span>
+                    <span>Personal organizer</span>
+
+                    <footer>
+                        <button className="button-edit-profile">
+                            <PiPencilLine />
+                            Editar seu perfil
+
+                        </button>
+                    </footer>
 
                      </div>
 
@@ -25,6 +37,10 @@ export default function Feed() {
 
 
                 <main className="main">
+                    <Post post={{} as any} />
+                    <Post post={{} as any} />
+                    <Post post={{} as any} />
+
 
                 </main>
 
