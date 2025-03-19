@@ -1,5 +1,9 @@
+'use client'
+import { FormEvent, useState } from "react";
 import Avatar from "../Avatar";
 import "./Styles.css";
+import { format, formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 type Author = {
     name: string;
@@ -7,13 +11,13 @@ type Author = {
     avatarUrl: string;
     author: Author;
 }
-//type comment = {
+type comment = {
 
-// message: string,
-// publishedAt: Date,
-// like: number,
-// author: Author
-//}
+ message: string,
+ publishedAt: Date,
+ like: number,
+ author: Author
+}
 type PostProps = {
     post: {
         author: Author;
@@ -24,33 +28,48 @@ type PostProps = {
     }
 }
 
-
 export default function Post({ post }: PostProps) {
+    const [newComment, setNewComment]= useState<string>('');
+
+    function handleCreateNewComment(event: FormEvent) {
+        event.preventDefault();
+        alert(newComment)
+
+    }
+
+    const dateFormat = formatDistanceToNow(post.publishedAt, {
+        locale: ptBR,
+        addSuffix:true
+    })
 
     return (
         <article className="post">
             <header>
                 <div className="author">
-                    <Avatar src={"https://avatars.githubusercontent.com/u/170477548?v=4&size=64"} hasBorder />
+                    <Avatar src={post.author.avatarUrl} hasBorder />
                     <div className="author-info">
-                        <span>Rosane Maia</span>
-                        <span>Personal organizer</span>
+                        <span>{post.author.name}</span>
+                        <span>{post.author.role}</span>
                     </div>
                 </div>
                 <time>
-                    Publicado há 2 horas
+                    {dateFormat}
                 </time>
             </header>
             <div className="content">
                 <p>
-                    "A persistência leva ao sucesso". "Hoje você tem a oportunidade de construir o amanhã que você deseja.
-                    Sonhe sem medos, viva sem limites.
-                    Se o plano não funciona, mude o plano, não a meta."
+                   {post.content} 
+                    
                 </p>
             </div>
-            <form className="form">
+            <form className="form" onSubmit={handleCreateNewComment}>
                 <strong>Deixe seu comentário</strong>
-                <textarea placeholder="Deixe seu comentário" />
+                <textarea 
+                placeholder="Deixe seu comentário"
+                value={newComment}
+                onChange={(e) => setNewComment (e.target.value)}
+                
+                />
 
                 <footer>
                     <button>
