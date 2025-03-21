@@ -4,6 +4,8 @@ import Avatar from "../Avatar";
 import "./Styles.css";
 import { format, formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import TextareaCustom from "../TextareaCustom/Index";
+import axios from "axios";
 
 type Author = {
     name: string;
@@ -20,6 +22,7 @@ type comment = {
 }
 type PostProps = {
     post: {
+        id: number;
         author: Author;
         publishedAt: Date,
         content: string,
@@ -31,9 +34,23 @@ type PostProps = {
 export default function Post({ post }: PostProps) {
     const [newComment, setNewComment]= useState<string>('');
 
-    function handleCreateNewComment(event: FormEvent) {
+   async function handleCreateNewComment(event: FormEvent) {
         event.preventDefault();
         alert(newComment)
+
+        const comment = {
+            Comment: newComment,
+            publishedAT: new Date().toISOString(),
+            author:{
+                name:"Rosane",
+                role: "personal organizer",
+                avatarUrl:"https://avatars.githubusercontent.com/u/170477548?v=4&size=64"
+            }
+        }
+
+        await axios.patch(`http://localhost:3001/posts/${post.id}`,{
+            comment: comment
+        })
 
     }
 
@@ -64,11 +81,10 @@ export default function Post({ post }: PostProps) {
             </div>
             <form className="form" onSubmit={handleCreateNewComment}>
                 <strong>Deixe seu comentário</strong>
-                <textarea 
-                placeholder="Deixe seu comentário"
-                value={newComment}
-                onChange={(e) => setNewComment (e.target.value)}
-                
+
+                <TextareaCustom message= {newComment}
+                setMessage={setNewComment}
+               title="DIGITE UM COMENTARIO"
                 />
 
                 <footer>
