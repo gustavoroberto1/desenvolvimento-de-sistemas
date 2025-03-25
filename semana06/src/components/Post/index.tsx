@@ -1,5 +1,5 @@
 'use client'
-import { FormEvent, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import Avatar from "../Avatar";
 import "./Styles.css";
 import { format, formatDistanceToNow } from "date-fns";
@@ -13,50 +13,64 @@ type Author = {
     avatarUrl: string;
     author: Author;
 }
-type comment = {
 
- message: string,
- publishedAt: Date,
- like: number,
- author: Author
+type Comment = {
+    id: string;
+    comment: string,
+    publishedAt: Date,
+    like: number,
+    author: Author
 }
+
+type Post = {
+    id: string;
+    author: Author;
+    publishedAt: Date,
+    content: string,
+    comments: Comment[];
+}
+
 type PostProps = {
-    post: {
-        id: number;
-        author: Author;
-        publishedAt: Date,
-        content: string,
-        // comments: comment[];
-
-    }
+    setPost: Dispatch<SetStateAction<Post[]>>,
+    post: Post
 }
 
-export default function Post({ post }: PostProps) {
-    const [newComment, setNewComment]= useState<string>('');
+export default function Post({ post, setPost }: PostProps) {
+    const [newComment, setNewComment] = useState<string>('');
 
-   async function handleCreateNewComment(event: FormEvent) {
+
+    async function loadPost() {
+        const response = await axios.get(`http://localhost:3001/posts/${post.id}`);
+        setPost((prev: Post[]) =>
+            prev.map(atual => (
+                atual.id == post.id ? response.data : atual)))
+    }
+
+    async function handleCreateNewComment(event: FormEvent) {
         event.preventDefault();
-        alert(newComment)
 
         const comment = {
-            Comment: newComment,
-            publishedAT: new Date().toISOString(),
-            author:{
-                name:"Rosane",
+            comment: newComment,
+            publishedAt: new Date().toISOString(),
+            author: {
+                name: "Rosane",
                 role: "personal organizer",
-                avatarUrl:"https://avatars.githubusercontent.com/u/170477548?v=4&size=64"
+                avatarUrl: "https://avatars.githubusercontent.com/u/170477548?v=4&size=64"
             }
         }
+        const comments = post.comments?.length ? [...post.comments, comment] : [comment]
 
-        await axios.patch(`http://localhost:3001/posts/${post.id}`,{
-            comment: comment
+        await axios.patch(`http://localhost:3001/posts/${post.id}`, {
+            "comments": comments
         })
+        loadPost()
+        setNewComment('');
 
     }
 
     const dateFormat = formatDistanceToNow(post.publishedAt, {
         locale: ptBR,
-        addSuffix:true
+        addSuffix: true
     })
 
     return (
@@ -75,16 +89,16 @@ export default function Post({ post }: PostProps) {
             </header>
             <div className="content">
                 <p>
-                   {post.content} 
-                    
+                    {post.content}
+
                 </p>
             </div>
             <form className="form" onSubmit={handleCreateNewComment}>
                 <strong>Deixe seu comentário</strong>
 
-                <TextareaCustom message= {newComment}
-                setMessage={setNewComment}
-               title="DIGITE UM COMENTARIO"
+                <TextareaCustom message={newComment}
+                    setMessage={setNewComment}
+                    title="DIGITE UM COMENTARIO"
                 />
 
                 <footer>
@@ -94,7 +108,9 @@ export default function Post({ post }: PostProps) {
                 </footer>
             </form>
 
+            {post.comments?.length ? post.comments.map(comment => (
+                <h1 key={comment.comment}>{comment.comment}</h1>
+            )): null}
         </article>
-
     )
 }

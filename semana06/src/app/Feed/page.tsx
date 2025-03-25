@@ -16,22 +16,25 @@ export default function Feed() {
     const [posts, setPosts] = useState<any[]>([]);
     const [content, setContent] = useState<string>('');
 
+    console.log
+
     useEffect(() => {
         loadPost();
     }, [])
 
     async function loadPost() {
         const response = await axios.get('http://localhost:3001/posts');
-       const postSort = response.data.sort((a: any, b: any) =>(
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-       ))
+        const postSort = response.data.sort((a: any, b: any) => (
+            new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+        ))
         setPosts(postSort);
 
     }
 
     async function handleCreatePost(event: FormEvent) {
+        event.preventDefault()
         const post = {
-            id: posts.length + 1,
+            id: String(posts.length + 1),
             content: content,
             publishedAt: new Date().toISOString(),
             author: {
@@ -40,7 +43,8 @@ export default function Feed() {
                 avatarUrl: "https://avatars.githubusercontent.com/u/170477548?v=4&size=64"
             }
         }
-        await axios.post("http://localhost:3001/posts" , post);
+        await axios.post("http://localhost:3001/posts", post);
+
         await loadPost();
         setContent('');
 
@@ -75,17 +79,17 @@ export default function Feed() {
 
 
                 <main className="main">
-                    <form onSubmit={handleCreatePost}className="form-post">
+                    <form onSubmit={handleCreatePost} className="form-post">
 
-                        <TextareaCustom message= {content}
-                        setMessage={setContent}
-                           title="OQUE VC ESTA PENSANDO???"
+                        <TextareaCustom message={content}
+                            setMessage={setContent}
+                            title="OQUE VC ESTA PENSANDO???"
                         />
                         <button type="submit">PUBLICAR</button>
                     </form>
 
                     {posts.map(item => (
-                        <Post post={item} key={item.id} />
+                        <Post post={item} key={item.id} setPost={setPosts} />
                     ))}
 
                 </main>
