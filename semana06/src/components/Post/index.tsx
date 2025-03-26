@@ -6,6 +6,8 @@ import { format, formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import TextareaCustom from "../TextareaCustom/Index";
 import axios from "axios";
+import Comment from "../Comment";
+import {v4 as uuid} from 'uuid';
 
 type Author = {
     name: string;
@@ -40,6 +42,18 @@ export default function Post({ post, setPost }: PostProps) {
 
 
     async function loadPost() {
+
+    }
+    async function handleDeletComment(event:MouseEvent, id:string) {
+        event.preventDefault();
+        const comentsFilter = post.comments.filter
+        
+    }
+    async function handlelikeComment(event:MouseEvent) {
+        
+    }
+    const 
+
         const response = await axios.get(`http://localhost:3001/posts/${post.id}`);
         setPost((prev: Post[]) =>
             prev.map(atual => (
@@ -50,8 +64,10 @@ export default function Post({ post, setPost }: PostProps) {
         event.preventDefault();
 
         const comment = {
+            id: uuid(),
             comment: newComment,
             publishedAt: new Date().toISOString(),
+            like: 0,
             author: {
                 name: "Rosane",
                 role: "personal organizer",
@@ -89,6 +105,7 @@ export default function Post({ post, setPost }: PostProps) {
             </header>
             <div className="content">
                 <p>
+                    
                     {post.content}
 
                 </p>
@@ -108,9 +125,9 @@ export default function Post({ post, setPost }: PostProps) {
                 </footer>
             </form>
 
-            {post.comments?.length ? post.comments.map(comment => (
-                <h1 key={comment.comment}>{comment.comment}</h1>
-            )): null}
+            {post.comments?.length && post.comments.map(item => (
+                <Comment key={item.id}comment={item}/>
+            ))}
         </article>
     )
 }

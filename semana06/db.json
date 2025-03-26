@@ -58,29 +58,43 @@
         "name": "Rosane Maia",
         "role": "Personal Organizer",
         "avatarUrl": "https://avatars.githubusercontent.com/u/170477548?v=4&size=64"
+      }
+    },
+    {
+      "id": "7",
+      "content": "\"Não é a linguagem de programação que define o programador, mas sim sua lógica.\"",
+      "publishedAt": "2025-03-25T21:59:46.029Z",
+      "author": {
+        "name": "Rosane Maia",
+        "role": "Personal Organizer",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/170477548?v=4&size=64"
+      }
+    },
+    {
+      "id": "8",
+      "content": "\"Uma linguagem não faz seu código ser bom, programadores bons fazem seu código ser bom.\"",
+      "publishedAt": "2025-03-25T22:01:28.445Z",
+      "author": {
+        "name": "Rosane Maia",
+        "role": "Personal Organizer",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/170477548?v=4&size=64"
+      }
+    },
+    {
+      "id": "9",
+      "content": "\"Se até as variáveis precisam ser declaradas porque não me declarar pra você?\"",
+      "publishedAt": "2025-03-25T22:02:10.493Z",
+      "author": {
+        "name": "Rosane Maia",
+        "role": "Personal Organizer",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/170477548?v=4&size=64"
       },
       "comments": [
         {
-          "comment": "teste",
-          "publishedAt": "2025-03-25T00:44:15.099Z",
-          "author": {
-            "name": "Rosane",
-            "role": "personal organizer",
-            "avatarUrl": "https://avatars.githubusercontent.com/u/170477548?v=4&size=64"
-          }
-        },
-        {
-          "comment": "teste1",
-          "publishedAt": "2025-03-25T00:44:37.915Z",
-          "author": {
-            "name": "Rosane",
-            "role": "personal organizer",
-            "avatarUrl": "https://avatars.githubusercontent.com/u/170477548?v=4&size=64"
-          }
-        },
-        {
-          "comment": "fdgdfg",
-          "publishedAt": "2025-03-25T00:45:46.307Z",
+          "id": "2c6c69b8-6bf2-4e44-bded-79d6a429e00d",
+          "comment": "verdade!",
+          "publishedAt": "2025-03-25T22:55:36.904Z",
+          "like": 0,
           "author": {
             "name": "Rosane",
             "role": "personal organizer",
