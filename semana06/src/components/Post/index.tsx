@@ -110,7 +110,7 @@ export default function Post({ post, setPost }: PostProps) {
     })
 
     return (
-        <article className="post">
+        <article className="post" data-testid="post-test">
             <header>
                 <div className="author">
                     <Avatar src={post.author.avatarUrl} hasBorder />
@@ -138,7 +138,7 @@ export default function Post({ post, setPost }: PostProps) {
                 />
 
                 <footer>
-                    <ButtonCustom />
+                    <ButtonCustom text='publicar' handle={() =>{}} />
                 </footer>
             </form>
 
