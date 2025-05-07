@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: darkgrey;
+    text-align: center;
+    padding: 30px;
+
+}
+
+h1 {
+    text-align: center;
+    color: black;
+}
+
+input,button {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.chat-conteiner{
+    width: 80%;
+    max-width: 700px;
+    margin: 20px auto;
+    background-color: #f4f4f4;
+    padding: 5px;
+    border-radius: 5px;
+    border-radius: 0px,0px,0px 10px rgba(26, 32, 26, 0.58);
+
+}
