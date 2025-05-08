@@ -1,49 +1,38 @@
-import { Task } from "../entity/Task";
+import { Task } from '../entity/Task';
+import { taskRepository } from '../repository/TaskRepository';
 
 class TaskService {
-
-    private taskList: Task[] = [];
-
-    public create(text: string): void {
-        const textAlreadyExist = this.taskList.find(task => task.getText() === text);
-        if (textAlreadyExist) {
-            throw new Error("Já existe uma tarefa com esse texto.")
-        }
-
-        const newTask = new Task(text);
-        this.taskList.push(newTask);
+    async create(text: string): Promise<Task> {
+        const task = new Task(text);
+        return await taskRepository.save(task);
     }
 
-    public getAll(): Task[] {
-        return this.taskList;
+    async list(): Promise<Task[]> {
+        return await taskRepository.find();
     }
 
-    public getById(id: string): Task | null {
-        const task = this.taskList.find(task => task.getId() === id);
-        return task ? task : null;
+    async findById(id: string): Promise<Task | null> {
+        return await taskRepository.findOneBy({ id });
     }
 
-    public updateCompleted(id: string){
-        const task = this.getById(id);
-        if(task === null){
-            throw new Error("Tarefa não foi encontrada.")
-        }
-
-        task.setCompleted(); 
-        return task;
+    async toggleCompleted(id: string): Promise<Task | null> {
+        const task = await this.findById(id);
+        if (!task) return null;
+        task.setCompleted();
+        return await taskRepository.save(task);
     }
 
-    public updateText(id: string, text: string){
-        const task = this.getById(id);
-        if(task === null){
-            throw new Error("Tarefa não foi encontrada.")
-        }
-
-        task.setText(text);
-        return task;
+    async updateText(id: string, newText: string): Promise<Task | null> {
+        const task = await this.findById(id);
+        if (!task) return null;
+        task.setText(newText);
+        return await taskRepository.save(task);
     }
 
+    async delete(id: string): Promise<boolean> {
+        const result = await taskRepository.delete(id);
+        return result.affected === 1;
+    }
 }
 
 export const taskService = new TaskService();
-
