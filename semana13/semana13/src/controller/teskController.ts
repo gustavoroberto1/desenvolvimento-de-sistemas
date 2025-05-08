@@ -1,5 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { taskService } from "../services/taskService";
+import { request } from "https";
 
 // crontrolle recebe informação e passa informação
 
@@ -51,6 +52,12 @@ export async function taskController(app: FastifyInstance) {
         // RETORNA A RESPOSTA PARA QUEM CHAMOU 
         return response.code(200).send(task);
 
+    })
+
+    app.delete('/task:id', (request,reply,)=> {
+        const {id} = request.params as {id: string};
+        taskService.deleteTask(id);
+        return reply.code(200).send();
     })
 
 }

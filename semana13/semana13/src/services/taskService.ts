@@ -39,8 +39,14 @@ class TaskService {
         if (task === null) {
             throw new Error("Tarefa não foi encontrada")
         }
+
+        
         task.setText(text);
         return task
+    }
+    public deleteTask(id: string){
+        this.taskList = this.taskList
+        .filder(task => task.getId() !==id);
     }
 }
 //  serve pra expota a class por inteiro 
