@@ -2,6 +2,8 @@ import { Task as TaskPrisma } from "@prisma/client";
 import { prisma } from "../prisma/client";
 
 class TaskService {
+
+    
     public async create(text: string): Promise<void> {
         const task: TaskPrisma = {
             id: crypto.randomUUID(),
