@@ -7,18 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Task {
-  id        String   @id
-  text      String
-  completed Boolean
-  createdAt DateTime
-  updatedAt DateTime @updatedAt
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-
-  @@map("tasks")
-}
-
 model User {
   id        String   @id
   name      String
@@ -32,11 +20,35 @@ model User {
   @@map("users")
 }
 
+model Task {
+  id        String    @id
+  text      String
+  completed Boolean
+  createdAt DateTime
+  updatedAt DateTime  @updatedAt
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  taskTag   TaskTag[]
+
+  @@map("tasks")
+}
+
 model Tag {
-  id        String   @id
+  id        String    @id
   name      String
   createdAt DateTime
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime  @updatedAt
+  taskTag   TaskTag[]
 
   @@map("tags")
+}
+
+model TaskTag {
+  taskId String
+  tagId  String
+  task   Task   @relation(fields: [taskId], references: [id])
+  tag    Tag    @relation(fields: [tagId], references: [id])
+  @@id([taskId, tagId])
+
+  @@map("task_tag")
 }
